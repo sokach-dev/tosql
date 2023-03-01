@@ -14,7 +14,7 @@ CREATE TABLE `od_commands` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 ```
 
-maybe we wan't query commands with some files, in rust, we may give a struct.
+Maybe we want query commands with some files, in rust, we may give a struct.
 
 ```rust
 use to_sql_condition::ToSqlCondition;
@@ -39,3 +39,6 @@ fn main() {
 }
 ```
 
+## Todo
+
+- [ ] add `order` feature
