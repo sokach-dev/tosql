@@ -1,8 +1,10 @@
 [package]
 name = "to_sql_condition"
 version = "0.1.0"
-authors = ["sokach"]
+authors = ["sokach-dev@hotmail.com"]
 edition = "2021"
+repository = "https://github.com/sokach-dev/tosql"
+description = "a simple genreate sql condition proc macro"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [lib]
