@@ -1,5 +1,5 @@
 # to_sql_condition
-to_sql_condition is a simple derived macro that generates conditions for SQL query statements to reduce coding. Currently, it only supports a limited set of features, including WHERE and LIMIT.
+"To_sql_condition" is a convenient derived macro that generates SQL query conditions, reducing the amount of manual coding required. However, it currently has limited capabilities and can only support a few features, such as WHERE and LIMIT.
 
 ## useages
 
@@ -14,7 +14,7 @@ CREATE TABLE `od_commands` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 ```
 
-maybe we wan't query commands with some files, in rust, we may give a struct.
+Perhaps we want to use query commands with certain files. In Rust, we could create a struct to handle this.
 
 ```rust
 use to_sql_condition::ToSqlCondition;

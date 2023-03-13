@@ -67,7 +67,7 @@ pub fn impl_to_sql_condition(input: DeriveInput) -> TokenStream {
 
     let output = quote! {
         impl #name {
-            fn to_sql_condition(&self) -> String {
+            pub fn to_sql_condition(&self) -> String {
                 let mut sql = String::new();
                 let mut where_clause = String::new();
                 let mut limit_clause = String::new();
