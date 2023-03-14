@@ -33,9 +33,9 @@ fn main() {
         Query{id: None, name: None, limit: Some(10)},
         Query{id: Some(2), name: None, limit: None},
     );
-    assert_eq!(q.to_sql_condition(), " WHERE `name` = 'tom' AND LIMIT 1");
+    assert_eq!(q.to_sql_condition(), " WHERE name = 'tom' AND LIMIT 1");
     assert_eq!(q2.to_sql_condition(), " LIMIT 10");
-    assert_eq!(q3.to_sql_condition(), " WHERE `id` = 2");
+    assert_eq!(q3.to_sql_condition(), " WHERE id = 2");
 }
 ```
 
