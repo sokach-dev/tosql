@@ -1,9 +1,10 @@
+use core::option;
 use to_sql_condition::ToSqlCondition;
 
 #[derive(ToSqlCondition, Debug)]
 struct Query {
-    id: Option<i32>,
-    name: Option<String>,
+    id: ::core::option::Option<i32>,
+    name: option::Option<String>,
     limit: Option<u32>,
 }
 

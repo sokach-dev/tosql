@@ -95,7 +95,7 @@ pub fn impl_to_sql_condition(input: DeriveInput) -> TokenStream {
 // judge whether the field is Option
 fn field_is_option_and_get_type(field: &Field) -> (bool, bool) {
     if let syn::Type::Path(TypePath { path, .. }) = &field.ty {
-        if let Some(segment) = path.segments.first() {
+        if let Some(segment) = path.segments.last() {
             if segment.ident == "Option" {
                 if let AngleBracketed(AngleBracketedGenericArguments { args, .. }) =
                     &segment.arguments
