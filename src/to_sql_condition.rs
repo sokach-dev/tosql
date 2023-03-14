@@ -39,9 +39,9 @@ pub fn impl_to_sql_condition(input: DeriveInput) -> TokenStream {
                     #where_clause
                     if let Some(field_value) = &self.#field_name {
                         if #is_number {
-                            where_clause.push_str(&format!(" AND `{}` = {}", stringify!(#field_name), field_value));
+                            where_clause.push_str(&format!(" AND {} = {}", stringify!(#field_name), field_value));
                         } else {
-                            where_clause.push_str(&format!(" AND `{}` = '{}'", stringify!(#field_name), field_value));
+                            where_clause.push_str(&format!(" AND {} = '{}'", stringify!(#field_name), field_value));
                         }
                     }
                 };
@@ -56,9 +56,9 @@ pub fn impl_to_sql_condition(input: DeriveInput) -> TokenStream {
                 where_clause = quote! {
                     #where_clause
                     if #is_number {
-                        where_clause.push_str(&format!(" AND `{}` = {}", stringify!(#field_name), self.#field_name));
+                        where_clause.push_str(&format!(" AND {} = {}", stringify!(#field_name), self.#field_name));
                     } else {
-                    where_clause.push_str(&format!(" AND `{}` = '{}'", stringify!(#field_name), self.#field_name));
+                    where_clause.push_str(&format!(" AND {} = '{}'", stringify!(#field_name), self.#field_name));
                     }
                 };
             }
