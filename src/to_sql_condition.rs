@@ -27,40 +27,60 @@ pub fn impl_to_sql_condition(input: DeriveInput) -> TokenStream {
         let field_name = field.ident.as_ref().unwrap();
         let (is_option, is_number) = field_is_option_and_get_type(&field);
         if is_option {
-            if field_name == "limit" {
-                limit_clause = quote! {
-                    #limit_clause
-                    if let Some(field_value) = &self.#field_name {
-                        limit_clause.push_str(&format!(" LIMIT {}", field_value));
-                    }
-                };
-            } else {
-                where_clause = quote! {
-                    #where_clause
-                    if let Some(field_value) = &self.#field_name {
-                        if #is_number {
-                            where_clause.push_str(&format!(" AND {} = {}", stringify!(#field_name), field_value));
-                        } else {
-                            where_clause.push_str(&format!(" AND {} = '{}'", stringify!(#field_name), field_value));
+            match field_name.to_string().as_str() {
+                "offset" => {
+                    limit_clause = quote! {
+                        #limit_clause
+                        if let Some(field_value) = &self.#field_name {
+                            limit_clause.push_str(&format!(" OFFSET {}", field_value));
                         }
-                    }
-                };
+                    };
+                }
+                "limit" => {
+                    limit_clause = quote! {
+                        #limit_clause
+                        if let Some(field_value) = &self.#field_name {
+                            limit_clause.push_str(&format!(" LIMIT {}", field_value));
+                        }
+                    };
+                }
+                _ => {
+                    where_clause = quote! {
+                        #where_clause
+                        if let Some(field_value) = &self.#field_name {
+                            if #is_number {
+                                where_clause.push_str(&format!(" AND {} = {}", stringify!(#field_name), field_value));
+                            } else {
+                                where_clause.push_str(&format!(" AND {} = '{}'", stringify!(#field_name), field_value));
+                            }
+                        }
+                    };
+                }
             }
         } else {
-            if field_name == "limit" {
-                limit_clause = quote! {
-                    #limit_clause
-                    limit_clause.push_str(&format!(" LIMIT {}", self.#field_name));
-                };
-            } else {
-                where_clause = quote! {
-                    #where_clause
-                    if #is_number {
-                        where_clause.push_str(&format!(" AND {} = {}", stringify!(#field_name), self.#field_name));
-                    } else {
-                    where_clause.push_str(&format!(" AND {} = '{}'", stringify!(#field_name), self.#field_name));
-                    }
-                };
+            match field_name.to_string().as_str() {
+                "offset" => {
+                    limit_clause = quote! {
+                        #limit_clause
+                        limit_clause.push_str(&format!(" OFFSET {}", self.#field_name));
+                    };
+                }
+                "limit" => {
+                    limit_clause = quote! {
+                        #limit_clause
+                        limit_clause.push_str(&format!(" LIMIT {}", self.#field_name));
+                    };
+                }
+                _ => {
+                    where_clause = quote! {
+                        #where_clause
+                        if #is_number {
+                            where_clause.push_str(&format!(" AND {} = {}", stringify!(#field_name), self.#field_name));
+                        } else {
+                        where_clause.push_str(&format!(" AND {} = '{}'", stringify!(#field_name), self.#field_name));
+                        }
+                    };
+                }
             }
         }
     }

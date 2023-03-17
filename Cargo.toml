@@ -1,6 +1,6 @@
 [package]
 name = "to_sql_condition"
-version = "0.1.4"
+version = "0.2.1"
 authors = ["sokach-dev@hotmail.com"]
 edition = "2021"
 repository = "https://github.com/sokach-dev/tosql"
